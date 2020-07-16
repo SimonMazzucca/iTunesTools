@@ -1,0 +1,15 @@
+[Notes:]
+[1) iTunes must be open (app will automatically open it if closed]
+[2) iTunes cannot be closed if command window is still open]
+
+[Requires Microsoft .NET Framework 4 Client Profile]
+[http://www.microsoft.com/en-us/download/details.aspx?id=24872]
+
+[Log entries in iTunes flagged with "!"]
+RunOrphanFilesReport
+
+[Log files paths]
+[LogAll:       log all tracks]
+[LogInPath:    log only tracks in a specific path]
+[LogNotInPath: log only tracks not in a path]
+RunFilePathReport;LogNotInPath=E:\

@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30309.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iTunesReporting", "iTunesReporting\iTunesReporting.csproj", "{3F104C4E-7ABC-4BEA-ACF8-D20C9F758B38}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlaylistManager", "PlaylistManager\PlaylistManager.csproj", "{2F33604F-361D-4A1B-8792-EE562DDF266A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3F104C4E-7ABC-4BEA-ACF8-D20C9F758B38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F104C4E-7ABC-4BEA-ACF8-D20C9F758B38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F104C4E-7ABC-4BEA-ACF8-D20C9F758B38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F104C4E-7ABC-4BEA-ACF8-D20C9F758B38}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F33604F-361D-4A1B-8792-EE562DDF266A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F33604F-361D-4A1B-8792-EE562DDF266A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F33604F-361D-4A1B-8792-EE562DDF266A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F33604F-361D-4A1B-8792-EE562DDF266A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {009390A5-14E3-44FD-8E0B-3FB300FFDB9A}
+	EndGlobalSection
+EndGlobal
