@@ -54,7 +54,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configuration.cs" />
     <Compile Include="Facade.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="Program.cs" />

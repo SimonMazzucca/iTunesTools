@@ -21,22 +21,17 @@ namespace iTunesReporting
 
         public void Run()
         {
-            WriteAppHeader();
-            LoadConfiguration();
-            RunTrackReports();
-            WriteReports();
-
-            //try
-            //{
-            //    WriteAppHeader();
-            //    LoadConfiguration();
-            //    RunTrackReports();
-            //    WriteReports();
-            //}
-            //catch (Exception ex)
-            //{
-            //    Logger.LogException(ex);
-            //}
+            try
+            {
+                WriteAppHeader();
+                LoadConfiguration();
+                RunTrackReports();
+                WriteReports();
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+            }
         }
 
         private void WriteAppHeader()
