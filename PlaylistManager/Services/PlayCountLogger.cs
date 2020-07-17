@@ -7,16 +7,15 @@ namespace PlaylistManager.Services
     public class PlayCountLogger : BaseService, IService
     {
 
-        public void Run()
+        public void Run(string playlistName)
         {
             iTunesApp itunes = new iTunesApp();
             IITLibraryPlaylist mainLibrary = itunes.LibraryPlaylist;
-            IITPlaylist playlist = itunes.LibrarySource.Playlists.GetPlaylist(_settings.Playlist);
+            IITPlaylist playlist = itunes.LibrarySource.Playlists.GetPlaylist(playlistName);
             IITTrackCollection tracks = playlist.Tracks;
 
-            string csvFilePath = GetFullCsvFilePath();
+            string csvFilePath = GetFullCsvFilePath(playlistName);
 
-            File.Delete(csvFilePath);
             if (CheckIfUserWantsToAbort(csvFilePath))
                 return;
 
@@ -27,7 +26,7 @@ namespace PlaylistManager.Services
                 {
                     IITTrack fileTrack = tracks[currTrackIndex];
                     Console.WriteLine("{0},{1},{2},{3}", fileTrack.Artist, fileTrack.TrackNumber, fileTrack.Name, fileTrack.PlayedCount);
-                    csvFile.WriteLine("\"{0}\",{1},\"{2}\",{3}", fileTrack.Artist, fileTrack.TrackNumber, fileTrack.Name, fileTrack.PlayedCount);
+                    csvFile.WriteLine("\"{0}\",\"{1}\",\"{2}\",\"{3}\"", fileTrack.Artist, fileTrack.TrackNumber, fileTrack.Name, fileTrack.PlayedCount);
                 }
             }
         }
@@ -37,15 +36,15 @@ namespace PlaylistManager.Services
             if (File.Exists(csvFilePath))
             {
                 Console.WriteLine("File already exists. Replace? [Y|N]");
-                ConsoleKeyInfo decision = Console.ReadKey();
+                ConsoleKeyInfo decision = Console.ReadKey(true);
                 if (decision.KeyChar == 'y')
                 {
                     File.Delete(csvFilePath);
-                    Console.WriteLine("File deleted: {0}", csvFilePath);
+                    Console.WriteLine("\nFile deleted: {0}", csvFilePath);
                 }
                 else
                 {
-                    Console.WriteLine("Abort");
+                    Console.WriteLine("\nAbort");
                     return true;
                 }
             }
@@ -53,9 +52,9 @@ namespace PlaylistManager.Services
             return false;
         }
 
-        private string GetFullCsvFilePath()
+        private string GetFullCsvFilePath(string playlistName)
         {
-            string name = String.Format("{0:yyyy.MM.dd} - {1}.csv", DateTime.Now, _settings.Playlist);
+            string name = String.Format("{0:yyyy.MM.dd} - {1}.csv", DateTime.Now, playlistName);
             string toReturn = Path.Combine(_settings.PlaylistPath, name);
 
             return toReturn;

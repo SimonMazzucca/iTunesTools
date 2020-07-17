@@ -22,7 +22,7 @@ namespace PlaylistManager
                 throw new NotImplementedException("Command not supported: " + command);
             }
 
-            service.Run();
+            service.Run(playlist);
         }
     }
 }

@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PlaylistManager.Services
+﻿namespace PlaylistManager.Services
 {
     public interface IService
     {
-        void Run();
+        void Run(string playlistName);
     }
 }

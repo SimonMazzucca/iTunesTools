@@ -8,7 +8,10 @@ namespace PlaylistManager
         {
             Facade facade = new Facade();
 
-            args = new string[] { "-l", "NP"}; 
+            //To debug
+            //args = new string[] { "-l", "NP" };
+            //args = new string[] { "-s", "NP" };
+
             if (args.Length != 2)
             {
                 Console.WriteLine("Usage:");
