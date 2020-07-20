@@ -25,7 +25,7 @@ namespace PlaylistManager.Services
                 {
                     IITTrack fileTrack = tracks[currTrackIndex];
                     Console.WriteLine("{0},{1},{2},{3}", fileTrack.Artist, fileTrack.TrackNumber, fileTrack.Name, fileTrack.PlayedCount);
-                    csvFile.WriteLine("\"{0}\",\"{1}\",\"{2}\",\"{3}\"", fileTrack.Artist, fileTrack.TrackNumber, fileTrack.Name, fileTrack.PlayedCount);
+                    csvFile.WriteLine("\"{0}\",{1},\"{2}\",{3}", fileTrack.Artist, fileTrack.TrackNumber, fileTrack.Name, fileTrack.PlayedCount);
                 }
             }
         }
