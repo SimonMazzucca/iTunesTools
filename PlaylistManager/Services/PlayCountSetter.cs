@@ -15,13 +15,9 @@ namespace PlaylistManager.Services
             IDictionary<string, int> playcountByArtist = GetPlaycountByArtist(latest);
 
             if (ConfirmPlayCountCorrect(playcountByArtist))
-            {
                 SetPlayCount(playcountByArtist, playlistName);
-            }
             else
-            {
-                Console.WriteLine("\nAbort");
-            }
+                Console.WriteLine("Abort");
         }
 
         private void SetPlayCount(IDictionary<string, int> playcountByArtist, string playlistName)
@@ -44,9 +40,7 @@ namespace PlaylistManager.Services
         private bool ConfirmPlayCountCorrect(IDictionary<string, int> playcountByArtist)
         {
             foreach (string artist in playcountByArtist.Keys)
-            {
                 Console.WriteLine("{0}: {1}", playcountByArtist[artist], artist);
-            }
 
             Console.WriteLine("Does this seem right? [Y|N]");
             ConsoleKeyInfo decision = Console.ReadKey(true);
@@ -56,19 +50,16 @@ namespace PlaylistManager.Services
         private IDictionary<string, int> GetPlaycountByArtist(string latest)
         {
             IDictionary<string, int> toReturn = new Dictionary<string, int>();
-
             TextFieldParser parser = new TextFieldParser(latest);
 
             parser.HasFieldsEnclosedInQuotes = true;
             parser.SetDelimiters(",");
 
-            string[] fields;
-
             while (!parser.EndOfData)
             {
-                fields = parser.ReadFields();
+                string[] fields = parser.ReadFields();
                 string artist = fields[0];
-                int playcount = Int32.Parse(fields[3]);
+                int playcount = Int32.Parse(fields[3]) + 1;
 
                 toReturn[artist] = playcount;
             }

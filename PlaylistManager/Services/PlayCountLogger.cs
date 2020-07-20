@@ -21,7 +21,6 @@ namespace PlaylistManager.Services
 
             using (StreamWriter csvFile = new StreamWriter(csvFilePath))
             {
-                //Start from 0?
                 for (int currTrackIndex = 1; currTrackIndex <= tracks.Count; currTrackIndex++)
                 {
                     IITTrack fileTrack = tracks[currTrackIndex];
@@ -40,11 +39,11 @@ namespace PlaylistManager.Services
                 if (decision.KeyChar == 'y')
                 {
                     File.Delete(csvFilePath);
-                    Console.WriteLine("\nFile deleted: {0}", csvFilePath);
+                    Console.WriteLine("File deleted: {0}", csvFilePath);
                 }
                 else
                 {
-                    Console.WriteLine("\nAbort");
+                    Console.WriteLine("Abort");
                     return true;
                 }
             }

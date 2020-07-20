@@ -24,7 +24,7 @@ namespace PlaylistManager
 
             facade.Run(command, playlist);
 
-            Console.ReadLine();
+            //Console.ReadLine();
         }
     }
 }
