@@ -23,8 +23,6 @@ namespace PlaylistManager
             var playlist = args[1];
 
             facade.Run(command, playlist);
-
-            //Console.ReadLine();
         }
     }
 }
