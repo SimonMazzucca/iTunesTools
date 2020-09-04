@@ -44,7 +44,7 @@ namespace PlaylistManager.Services
 
             Console.WriteLine("Does this seem right? [Y|N]");
             ConsoleKeyInfo decision = Console.ReadKey(true);
-            return (decision.KeyChar == 'y');
+            return (decision.KeyChar == 'y' || decision.Key == ConsoleKey.Enter);
         }
 
         private IDictionary<string, int> GetPlaycountByArtist(string latest)
