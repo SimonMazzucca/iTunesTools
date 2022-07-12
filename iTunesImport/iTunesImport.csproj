@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Version>2.0.0</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="Interop.iTunesAdminLib">
+      <HintPath>..\iTunes Lib\Interop.iTunesAdminLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.iTunesLib">
+      <HintPath>..\iTunes Lib\Interop.iTunesLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.iTunesOutlookAddInLib">
+      <HintPath>..\iTunes Lib\Interop.iTunesOutlookAddInLib.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
