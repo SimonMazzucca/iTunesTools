@@ -17,11 +17,15 @@ namespace iTunesImport
 
         private const string TRACKS_PATH = @"{0}:\!Songs";
         private const string PLAYLIST_PATH = @"{0}:\";
-        // Private Const PLAYLIST_PATH As String = "{0}:\M\Mazzucca, Simon"
+        //private const string PLAYLIST_PATH = @"{0}:\M\Mazzucca, Simon";
 
         private const string LOG_PATH = @"C:\Temp";
         private const string LOG_FILE = "iTunesImport Report.txt";
         private const bool DEBUG_MODE = false;
+
+        // Used as default for ANSI
+        // See: https://docs.microsoft.com/en-us/windows/win32/intl/code-page-identifiers
+        private const int ANSI_LATIN_1 = 1252;
 
         #endregion
 
@@ -102,6 +106,9 @@ namespace iTunesImport
             _MusicDrive = ConfigurationManager.AppSettings["MusicDrive"].ToString();
             _TracksPath = string.Format(TRACKS_PATH, _MusicDrive);
             _PlaylistPath = string.Format(PLAYLIST_PATH, _MusicDrive);
+
+            // Necessary to properly detect ANSI_LATIN_1 (1252)
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
         }
 
         ~Importer()
@@ -184,15 +191,36 @@ namespace iTunesImport
             Finished?.Invoke();
         }
 
-        public void ImportPlaylist(string strPlaylist)
+        /// <summary>
+        /// After converting the app from VB to C#, I started having an issue related to ANSI vs UTF
+        /// In VB the same code was capable of seamlessly handling ANSI and UTF (since my m3u files are a mix of both)
+        /// In C# this is not true anymore and I need to specify diff encoding when opening one or the other
+        /// The tricky part is to reliably identify the correct file format
+        /// Apparently this is not trivial, but I found FileHelper online that seems to work
+        /// </summary>
+        public void ImportPlaylist(string playlist)
         {
-            var reader = new StreamReader(strPlaylist, Encoding.Default, true);
-            string playlistPath = Path.GetDirectoryName(strPlaylist);
+            StreamReader reader;
+
+            Encoding enc = FileHelper.GetEncoding(playlist);
+            //Debug.WriteLine(enc.ToString());
+
+            if (enc.EncodingName == "Western European (ISO)")
+                reader = new StreamReader(playlist, Encoding.GetEncoding(ANSI_LATIN_1), true);
+            else if (enc.EncodingName == "Unicode (UTF-8)")
+                reader = new StreamReader(playlist, Encoding.UTF8, true);
+            else
+            {
+                LogBadPlaylist(playlist);
+                return;
+            }
+
+            string playlistPath = Path.GetDirectoryName(playlist);
             string line;
             string track;
 
             LogOpen();
-            CurrentPlaylist = strPlaylist;
+            CurrentPlaylist = playlist;
             while (!reader.EndOfStream)
             {
                 line = reader.ReadLine();
@@ -283,9 +311,6 @@ namespace iTunesImport
             {
                 Debug.WriteLine(trackPath);
 
-                //var testTrack1 = _iTunesApp.LibraryPlaylist.Tracks.get_ItemByName(trackPath);
-                //var testTrack2 = _iTunesApp.LibraryPlaylist.Tracks.get_ItemByName("xxxxxxxxxx");
-
                 status = _iTunesApp.LibraryPlaylist.AddFile(trackPath);
 
                 if (status == null)
@@ -375,6 +400,15 @@ namespace iTunesImport
 
             LogClose();
 
+        }
+
+        private void LogBadPlaylist(string playlist)
+        {
+            LogOpen();
+            _LogWriter.WriteLine();
+            _LogWriter.WriteLine("Cannot determine file format of playlist:");
+            _LogWriter.WriteLine(playlist);
+            LogClose();
         }
 
         private void LogBadTracks()
