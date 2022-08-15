@@ -7,7 +7,7 @@ namespace iTunesImport
     public class FileHelper
     {
         /// <summary>
-        /// Determines a text file's encoding by analyzing its byte order mark (BOM) and if not found try parsing into diferent encodings       
+        /// Determines a text file's encoding by analyzing its byte order mark (BOM) and if not found try parsing into different encodings       
         /// Defaults to UTF8 when detection of the text file's endianness fails.
         /// </summary>
         /// <param name="filename">The text file to analyze.</param>
